@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <script src="cordova.js"></script>
+    <style>
+        .dropit {
+            position: relative;
+            float: left;
+            height: 600px;
+            width: 250px;
+            background-color: dimgray;
+            margin: 5px;
+        }
+        
+        .hoverColor {
+            background-color: darkslategray;
+        }
+        
+        .cDrag {
+            margin: 5 auto;
+        }
+        
+        .card {
+            min-height: 200px;
+            width: 250px;
+            background-color: #e6e6e6;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .cButton {
+            background-color: azure;
+            height: 30px;
+            width: 220px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="hideme" class="cDrag" style="height:100px; width:200px; background-color:saddlebrown; border-radius:5px; border:none;"><span>Hello</hello><div>Hello also</div></div>
+    <div class="hideme cDrag" style="height:100px; width:200px; background-color:saddlebrown; border-radius:5px; border:none;"></div>
+    <div class="hideme cDrag" style="height:100px; width:200px; background-color:saddlebrown; border-radius:5px; border:none;"></div>
+    <div class="hideme cDrag" style="height:100px; width:200px; background-color:saddlebrown; border-radius:5px; border:none;"></div>
+    <div id="new_note" class="cButton">Click Me</div>
+    <div id="droponMe1" class="dropit cDrop"></div>
+    <div id="droponMe2" class="dropit cDrop"></div>
+    <div id="droponMe3" class="dropit cDrop"></div>
+    <script>
+
+    var jsonData = {"title":"BlankCard","desc":"Put your description here.", "due_date":"01/30/2017", "assigned_to":"Noone"};
+
+    c$(".cDrop").droppable("hoverColor");
+    c$(".cDrag").draggable();
+    c$("#new_note").click(function(){
+        //create and attach multiple items with added class and event
+        c$("#droponMe1").append(
+            [
+                c$(document.createElement("div")).addClass("card").addClass("cDrag").draggable().returnJSObj(),
+                c$(document.createElement("div")).addClass("card").addClass("cDrag").draggable().returnJSObj()
+            ]);
+
+        //create single item with added class and event
+        c$("#droponMe1").append(c$(document.createElement("div")).addClass("card").addClass("cDrag").draggable().returnJSObj());
+
+        //create items using c$ then attaching them as variables with append
+        var b = c$(document.createElement("div")).addClass("card").addClass("cDrag").draggable().returnJSObj();
+        var c = c$(document.createElement("div")).addClass("card").addClass("cDrag").draggable().returnJSObj();
+        var d = c$(document.createElement("div")).addClass("card").addClass("cDrag").draggable().returnJSObj();
+        c$("#droponMe2").append([b,c,d]);
+        
+        //create items using raw javascript and then attaching as array with append and then assigning event
+        var e = document.createElement("div");
+        e.className = "dropit cDrop";
+        var f = document.createElement("div");
+        f.className = "dropit cDrop";
+        var g = document.createElement("div");
+        g.className = "dropit cDrop";
+        var h = document.createElement("div");
+        h.className = "dropit cDrop";
+        c$("#body").append([e,f,g,h]);
+        c$([e,f,g,h]).droppable("hoverColor");
+    });
+    </script>
+</body>
+</html>
